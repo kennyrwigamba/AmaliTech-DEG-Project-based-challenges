@@ -1,5 +1,23 @@
+/* Inter & JetBrains Mono fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
+
+@theme {
+  --color-app-bg: #0d1117;
+  --color-panel-bg: #161b22;
+  --color-footer-bg: #21262d;
+  --color-border-subtle: rgb(255 255 255 / 0.08);
+  --color-text-main: #e6edf3;
+  --color-text-muted: #8b949e;
+  --color-text-soft: #c9d1d9;
+  --color-text-link: #9ecbff;
+  --color-text-link-hover: #58a6ff;
+  --color-text-selected: #d2f4d9;
+  --color-accent-focus: #58a6ff;
+  --color-highlight-bg: rgb(57 211 83 / 0.22);
+  --color-selected-bg: rgb(57 211 83 / 0.16);
+  --color-tree-hover: rgb(88 166 255 / 0.08);
+}
 
 * {
   box-sizing: border-box;
@@ -8,7 +26,6 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: #0d1117;
-  color: #e6edf3;
+  @apply bg-app-bg text-text-main;
   font-size: 14px;
 }
