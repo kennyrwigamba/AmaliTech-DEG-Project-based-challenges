@@ -1,16 +1,45 @@
-# React + Vite
+# SecureVault Explorer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SecureVault Explorer is a React + Vite file explorer demo with:
 
-Currently, two official plugins are available:
+- folder/file tree navigation
+- keyboard navigation (`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Enter`)
+- search with inline clear action
+- breadcrumb path navigation
+- file metadata panel
+- custom icon mapping using Material Theme SVG assets
+- Tailwind CSS v4 styling with semantic theme tokens
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Figma Prototype
 
-## React Compiler
+- [Secure Vault Explorer Prototype](https://www.figma.com/design/Vios91f2DbkH7vzjmbE1mP/Secure-Vault-Explorer?node-id=0-1&t=Bl6tDOiKN3nNc9VF-1)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- React 19
+- Vite 8
+- Tailwind CSS v4 (`@tailwindcss/vite`)
+- ESLint 10
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Project Structure
+
+- `src/App.jsx` - app state and orchestration
+- `src/components/` - UI components (`Navbar`, `SidebarPanel`, `MainPanel`, `TreeNode`, etc.)
+- `src/data/data.json` - file tree data source
+- `src/utils/treeUtils.js` - tree helpers (filtering, flattening, lookup maps)
+- `src/assets/icons/material/` - local SVG icons used in the tree
+- `src/index.css` - Tailwind import + theme tokens
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
+```
+
+## Scripts
+
+- `npm run dev` - start development server
+- `npm run build` - create production build
+- `npm run preview` - preview production build
+- `npm run lint` - run ESLint
