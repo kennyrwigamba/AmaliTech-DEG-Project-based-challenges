@@ -10,8 +10,10 @@ function PropertiesPanel({ file, extension }) {
             <dd className="m-0 truncate font-['JetBrains_Mono',monospace] text-xs text-text-main">{file.name}</dd>
           </div>
           <div className="mb-3 rounded-md border border-border-subtle p-2">
-            <dt className="mb-1 text-xs text-text-muted">Type</dt>
-            <dd className="m-0 font-['JetBrains_Mono',monospace] text-xs text-text-main">{extension}</dd>
+            <dt className="mb-1 text-xs text-text-muted">Extension</dt>
+            <dd className="m-0 font-['JetBrains_Mono',monospace] text-xs text-text-main">
+              {extension === 'unknown' ? '—' : extension}
+            </dd>
           </div>
           <div className="mb-3 rounded-md border border-border-subtle p-2">
             <dt className="mb-1 text-xs text-text-muted">Size</dt>
