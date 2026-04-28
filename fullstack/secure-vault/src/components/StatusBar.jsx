@@ -1,9 +1,9 @@
 function StatusBar({ totalFiles, selectedPath }) {
   return (
-    <footer className="col-span-full flex items-center justify-between border-t border-border-subtle bg-footer-bg px-3 py-1.5 text-[11px] text-text-muted">
-      <span>{totalFiles} files indexed</span>
+    <footer className="ds-shell-padding col-span-full flex items-center justify-between border-t border-border-subtle bg-panel-bg py-2 text-xs text-text-muted">
+      <span className="leading-4">{totalFiles} files indexed</span>
       {/* Full selected path helps users keep context in deep trees. */}
-      <span className="font-['JetBrains_Mono',monospace]">
+      <span className="ds-mono leading-4 text-text-muted">
         {selectedPath?.length
           ? selectedPath.map((item) => item.name).join(' / ')
           : 'No file selected'}

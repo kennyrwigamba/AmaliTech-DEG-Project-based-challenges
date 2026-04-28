@@ -7,24 +7,24 @@ function MainPanel({ activePath, selectedFile, onCrumbClick }) {
       <Breadcrumb
         path={activePath}
         onCrumbClick={onCrumbClick}
-        className="border-b border-border-subtle px-6 py-2.5"
+        className="ds-shell-padding border-b border-border-subtle py-3"
       />
-      <div className="flex flex-col gap-4 p-6">
+      <div className="ds-content-padding flex flex-col gap-4">
         {selectedFile ? (
           <>
-            <h2 className="m-0 text-[20px] text-text-main">Preview</h2>
-            <p className="font-['JetBrains_Mono',monospace] text-sm text-text-link">
+            <h1 className="ds-page-title m-0">Preview</h1>
+            <p className="ds-mono m-0 text-text-link">
               {selectedFile.name}
             </p>
-            <p className="max-w-140 leading-[1.6] text-text-muted">
+            <p className="ds-body-copy m-0 max-w-[560px]">
               Secure preview is unavailable in demo mode. Select a different file in the explorer.
             </p>
           </>
         ) : (
           <>
             {/* Friendly empty state before a file is selected. */}
-            <h2 className="m-0 text-[20px] text-text-main">SecureVault Explorer</h2>
-            <p className="max-w-140 leading-[1.6] text-text-muted">
+            <h2 className="ds-page-title m-0">SecureVault Explorer</h2>
+            <p className="ds-body-copy m-0 max-w-[560px]">
               Select a file from the tree to view metadata in the properties panel.
             </p>
           </>

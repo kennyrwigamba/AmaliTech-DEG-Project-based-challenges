@@ -5,7 +5,7 @@ function FileTree(props) {
 
   if (!nodes.length) {
     // Shown when search returns no matches.
-    return <p className="p-3 text-sm text-text-muted">No matching files or folders.</p>
+    return <p className="ds-compact-text m-0 p-4">No matching files or folders.</p>
   }
 
   return (

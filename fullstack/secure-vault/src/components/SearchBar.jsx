@@ -14,7 +14,7 @@ function SearchBar({ value, onChange, className = '' }) {
         </span>
 
         <input
-          className="min-w-0 w-full rounded-md border border-border-subtle bg-app-bg py-2 pl-9 pr-10 text-[13px] text-text-main outline-none focus:outline-1 focus:outline-accent-focus"
+          className="ds-focus-ring min-w-0 w-full rounded-md border border-border-subtle bg-app-bg py-2 pl-9 pr-10 text-[13px] leading-5 text-text-main outline-none"
           type="text"
           placeholder="Search files and folders..."
           value={value}
@@ -26,7 +26,7 @@ function SearchBar({ value, onChange, className = '' }) {
             // Reuses the right slot when there is text, so Clear stays in-place.
             <button
               type="button"
-              className="rounded px-1.5 py-0.5 text-[11px] text-text-muted hover:bg-border-subtle hover:text-text-soft"
+              className="ds-focus-ring rounded px-2 py-1 text-xs text-text-muted hover:bg-border-subtle hover:text-text-soft"
               onClick={() => onChange('')}
             >
               Clear

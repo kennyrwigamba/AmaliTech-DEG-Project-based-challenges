@@ -2,7 +2,7 @@ function Breadcrumb({ path, onCrumbClick, className = '' }) {
   if (!path?.length) {
     return (
       <div
-        className={`overflow-hidden text-ellipsis whitespace-nowrap font-['JetBrains_Mono',monospace] text-xs text-text-muted ${className}`.trim()}
+        className={`ds-mono overflow-hidden text-ellipsis whitespace-nowrap text-text-muted ${className}`.trim()}
       >
         Root
       </div>
@@ -11,14 +11,14 @@ function Breadcrumb({ path, onCrumbClick, className = '' }) {
 
   return (
     <div
-      className={`truncate font-['JetBrains_Mono',monospace] text-xs text-text-muted ${className}`.trim()}
+      className={`ds-mono truncate text-text-muted ${className}`.trim()}
     >
       {path.map((node, index) => (
         <span key={node.id}>
           {/* Breadcrumb links let users jump directly to any ancestor node. */}
           <button
             type="button"
-            className="cursor-pointer border-none bg-transparent p-0 font-inherit text-text-link hover:text-text-link-hover"
+            className="ds-focus-ring cursor-pointer rounded-sm border-none bg-transparent p-0 font-inherit text-text-link hover:text-text-link-hover"
             onClick={() => onCrumbClick(node)}
           >
             {node.name}
@@ -30,4 +30,4 @@ function Breadcrumb({ path, onCrumbClick, className = '' }) {
   )
 }
 
-export default Breadcrumb   
+export default Breadcrumb
