@@ -1,4 +1,4 @@
-import { useMemo, useReducer } from 'react'
+import { useCallback, useEffect, useMemo, useReducer } from 'react'
 import MainPanel from './components/MainPanel'
 import Navbar from './components/Navbar'
 import PropertiesPanel from './components/PropertiesPanel'
@@ -125,54 +125,74 @@ function App() {
     dispatch({ type: 'set_selected', id: node.id })
   }
 
-  function handleKeyDown(event) {
-    if (!visibleIds.length) return
+  const handleExplorerKeyDown = useCallback(
+    (event) => {
+      if (!visibleIds.length) return
 
-    const focusedId = state.focusedId ?? visibleIds[0]
-    const focusedIndex = Math.max(visibleIds.indexOf(focusedId), 0)
-    const focusedNode = maps.byId.get(visibleIds[focusedIndex])
-    if (!focusedNode) return
+      const focusedId = state.focusedId ?? visibleIds[0]
+      const focusedIndex = Math.max(visibleIds.indexOf(focusedId), 0)
+      const focusedNode = maps.byId.get(visibleIds[focusedIndex])
+      if (!focusedNode) return
 
-    if (event.key === 'ArrowDown') {
-      event.preventDefault()
-      const nextIndex = Math.min(focusedIndex + 1, visibleIds.length - 1)
-      dispatch({ type: 'set_focused', id: visibleIds[nextIndex] })
-      return
-    }
-
-    if (event.key === 'ArrowUp') {
-      event.preventDefault()
-      const nextIndex = Math.max(focusedIndex - 1, 0)
-      dispatch({ type: 'set_focused', id: visibleIds[nextIndex] })
-      return
-    }
-
-    if (event.key === 'ArrowRight') {
-      if (focusedNode.type !== 'folder') return
-      event.preventDefault()
-      dispatch({ type: 'expand_node', id: focusedNode.id })
-      return
-    }
-
-    if (event.key === 'ArrowLeft') {
-      if (focusedNode.type === 'folder' && effectiveExpandedIds.has(focusedNode.id)) {
+      if (event.key === 'ArrowDown') {
         event.preventDefault()
-        dispatch({ type: 'collapse_node', id: focusedNode.id })
+        const nextIndex = Math.min(focusedIndex + 1, visibleIds.length - 1)
+        dispatch({ type: 'set_focused', id: visibleIds[nextIndex] })
         return
       }
-      const parentId = maps.parentById.get(focusedNode.id)
-      if (parentId) {
+
+      if (event.key === 'ArrowUp') {
         event.preventDefault()
-        dispatch({ type: 'set_focused', id: parentId })
+        const nextIndex = Math.max(focusedIndex - 1, 0)
+        dispatch({ type: 'set_focused', id: visibleIds[nextIndex] })
+        return
       }
-      return
+
+      if (event.key === 'ArrowRight') {
+        if (focusedNode.type !== 'folder') return
+        event.preventDefault()
+        dispatch({ type: 'expand_node', id: focusedNode.id })
+        return
+      }
+
+      if (event.key === 'ArrowLeft') {
+        if (focusedNode.type === 'folder' && effectiveExpandedIds.has(focusedNode.id)) {
+          event.preventDefault()
+          dispatch({ type: 'collapse_node', id: focusedNode.id })
+          return
+        }
+        const parentId = maps.parentById.get(focusedNode.id)
+        if (parentId) {
+          event.preventDefault()
+          dispatch({ type: 'set_focused', id: parentId })
+        }
+        return
+      }
+
+      if (event.key === 'Enter' && focusedNode.type === 'file') {
+        event.preventDefault()
+        dispatch({ type: 'set_selected', id: focusedNode.id })
+      }
+    },
+    [visibleIds, state.focusedId, maps.byId, maps.parentById, effectiveExpandedIds],
+  )
+
+  useEffect(() => {
+    function isTypingTarget(target) {
+      if (!target || typeof target !== 'object') return false
+      const tag = target.tagName?.toLowerCase()
+      if (tag === 'input' || tag === 'textarea' || tag === 'select') return true
+      return Boolean(target.isContentEditable)
     }
 
-    if (event.key === 'Enter' && focusedNode.type === 'file') {
-      event.preventDefault()
-      dispatch({ type: 'set_selected', id: focusedNode.id })
+    function onDocumentKeyDown(event) {
+      if (isTypingTarget(event.target)) return
+      handleExplorerKeyDown(event)
     }
-  }
+
+    document.addEventListener('keydown', onDocumentKeyDown)
+    return () => document.removeEventListener('keydown', onDocumentKeyDown)
+  }, [handleExplorerKeyDown])
 
   return (
     <div className="grid h-screen grid-rows-[52px_1fr]">
@@ -190,7 +210,6 @@ function App() {
           searchQuery={state.searchQuery}
           onNodeClick={handleNodeClick}
           onNodeFocus={handleNodeFocus}
-          onKeyDown={handleKeyDown}
         />
 
         <MainPanel
