@@ -1,11 +1,9 @@
-/* Inter & JetBrains Mono fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
 
 @theme {
   --color-app-bg: #0d1117;
   --color-panel-bg: #161b22;
-  --color-footer-bg: #21262d;
   --color-border-subtle: rgb(255 255 255 / 0.08);
   --color-text-main: #e6edf3;
   --color-text-muted: #8b949e;
@@ -28,4 +26,53 @@ body {
   font-family: 'Inter', sans-serif;
   @apply bg-app-bg text-text-main;
   font-size: 14px;
+  line-height: 1.5;
+}
+
+.ds-app-title {
+  @apply text-lg font-semibold tracking-tight text-text-main;
+}
+
+.ds-page-title {
+  @apply text-xl font-semibold tracking-tight text-text-main;
+}
+
+.ds-panel-title {
+  @apply text-base font-semibold text-text-main;
+}
+
+.ds-body-copy {
+  @apply text-sm leading-6 text-text-muted;
+}
+
+.ds-compact-text {
+  @apply text-xs leading-5 text-text-muted;
+}
+
+.ds-caption {
+  @apply text-xs leading-4 text-text-muted;
+}
+
+.ds-mono {
+  @apply font-['JetBrains_Mono',monospace] text-xs font-medium;
+}
+
+.ds-mono-soft {
+  @apply font-['JetBrains_Mono',monospace] text-xs font-medium text-text-soft;
+}
+
+.ds-shell-padding {
+  @apply px-6;
+}
+
+.ds-content-padding {
+  @apply p-6;
+}
+
+.ds-panel-padding {
+  @apply p-4;
+}
+
+.ds-focus-ring {
+  @apply focus-visible:outline focus-visible:outline-1 focus-visible:outline-accent-focus;
 }
