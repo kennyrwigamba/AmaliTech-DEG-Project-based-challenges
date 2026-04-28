@@ -12,6 +12,10 @@ SecureVault Explorer is a React + Vite file explorer for navigating nested vault
 - Keyboard navigation from anywhere except text fields (`ArrowUp`, `ArrowDown`, `ArrowLeft`, `ArrowRight`, `Enter`)
 - Status bar summary for vault-wide context
 
+## Project Website Demo
+
+- [Secure Vault Explorer Website](https://secure-vault-explorer.vercel.app/)
+
 ## Figma design
 
 - [Secure Vault Explorer screens](https://www.figma.com/design/Vios91f2DbkH7vzjmbE1mP/Secure-Vault-Explorer?node-id=0-1)
