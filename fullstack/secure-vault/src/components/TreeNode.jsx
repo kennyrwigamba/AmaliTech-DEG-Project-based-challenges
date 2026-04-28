@@ -20,14 +20,12 @@ import svgIcon from "../assets/icons/material/svg.svg";
 import wordIcon from "../assets/icons/material/word.svg";
 import yamlIcon from "../assets/icons/material/yaml.svg";
 
-function getExtension(name) {
-  const index = name.lastIndexOf(".");
-  return index === -1 ? "" : name.slice(index + 1).toLowerCase();
-}
+import { getExtension } from "../utils/treeUtils";
 
 function getFileIcon(name) {
   const lowerName = name.toLowerCase();
-  const extension = getExtension(name);
+  const rawExt = getExtension(name);
+  const extension = rawExt === "unknown" ? "" : rawExt;
 
   // Prefer exact/special filename matches before generic extension rules.
   if (lowerName === ".gitignore") return gitIcon;
@@ -79,12 +77,11 @@ function getFolderIcon(name, isExpanded) {
 
 function highlightMatch(text, query) {
   if (!query.trim()) return text;
-  // Escape user input before building a regex to avoid invalid patterns.
   const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const regex = new RegExp(`(${escapedQuery})`, "i");
   const parts = text.split(regex);
   return parts.map((part, index) =>
-    regex.test(part) ? (
+    index % 2 === 1 ? (
       <mark
         key={`${part}-${index}`}
         className="rounded-xs bg-highlight-bg px-px text-text-selected"
